@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+#game-board {
+    max-width: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.board-square {
+    width: calc(100px/3);
+    height: calc(100px/3);
+    border: solid black 1px;
+}

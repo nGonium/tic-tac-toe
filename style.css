@@ -1,0 +1,19 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#game-board {
+  max-width: 100px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
+.board-square {
+  width: calc(100px/3);
+  height: calc(100px/3);
+  border: solid black 1px;
+}
+/*# sourceMappingURL=style.css.map */

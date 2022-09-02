@@ -51,33 +51,41 @@ const game = (() => {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
     }
     const getMarker = () => currentPlayer.marker;
+    const _checkSequence = (initial, increment) => {
+        let firstMark = gameBoard.getSquareContent(initial);
+        if (firstMark === '') return false;
+        for (let i = initial + increment; 
+            i <= initial + increment * 2; 
+            i += increment) {
+            if(gameBoard.getSquareContent(i) != firstMark) return false;
+        }
+        return true;
+    }
     const _checkRows = () => {
         // (+3, +1)
         // 0 1 2 
         // 3 4 5 
         // 6 7 8
-        let firstMark;
-        for (let i = 0; i <= 6; i += 3) {
-            firstMark = gameBoard.getSquareContent(i);
-            if(firstMark === '') continue;
-            for(let j = 1; j <= 2; j++) {
-                if(gameBoard.getSquareContent(i + j) != firstMark) break;
-                if(j === 2) return true;
-            }
+        for (i = 0; i <= 6; i += 3) {
+            if(_checkSequence(i, 1)) return true;
         }
-        return false
+        return false;
     }
+    
     const _checkCols = () => {
         // (+1 +3)
         // 0 3 6 
         // 1 4 7 
         // 2 5 8 
-        return false
+        for (i = 0; i <= 2; i++) {
+            if(_checkSequence(i, 3)) return true;
+        }
+        return false;
     }
     const _checkDiagonals = () => {
         // 0 4 8 (+4)
         // 2 4 6 (+2)
-        return false
+        return _checkSequence(0, 4) || _checkSequence(2, 2);
     }
     const _isWin = () => _checkRows() || _checkCols() || _checkDiagonals();
     return {
